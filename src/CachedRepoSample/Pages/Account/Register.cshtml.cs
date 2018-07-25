@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+using CachedRepoSample.Data.Models;
+using CachedRepoSample.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using CachedRepoSample.Data;
-using CachedRepoSample.Services;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace CachedRepoSample.Pages.Account
 {
