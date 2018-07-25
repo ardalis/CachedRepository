@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CachedRepoSample.Data.Migrations
+namespace CachedRepoSample.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -83,6 +83,10 @@ namespace CachedRepoSample.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Steve Smith" }
+                    );
                 });
 
             modelBuilder.Entity("CachedRepoSample.Data.Models.Resource", b =>
@@ -91,13 +95,13 @@ namespace CachedRepoSample.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AuthorId");
+                    b.Property<int>("AuthorId");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("TypeId");
+                    b.Property<int>("ResourceTypeId");
 
                     b.Property<string>("Url");
 
@@ -105,9 +109,13 @@ namespace CachedRepoSample.Data.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("TypeId");
+                    b.HasIndex("ResourceTypeId");
 
-                    b.ToTable("Resource");
+                    b.ToTable("Resources");
+
+                    b.HasData(
+                        new { Id = 1, AuthorId = 1, Description = "Published in 2002", Name = "ASP.NET By Example", ResourceTypeId = 1, Url = "https://www.amazon.com/ASP-NET-Example-Steven-Smith/dp/0789725622" }
+                    );
                 });
 
             modelBuilder.Entity("CachedRepoSample.Data.Models.ResourceType", b =>
@@ -122,7 +130,15 @@ namespace CachedRepoSample.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ResourceType");
+                    b.ToTable("ResourceTypes");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Book", SortOrder = 0 },
+                        new { Id = 2, Name = "Podcast Episode", SortOrder = 0 },
+                        new { Id = 3, Name = "Blog Post", SortOrder = 0 },
+                        new { Id = 4, Name = "Interview", SortOrder = 0 },
+                        new { Id = 5, Name = "Video", SortOrder = 0 }
+                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -239,11 +255,13 @@ namespace CachedRepoSample.Data.Migrations
                 {
                     b.HasOne("CachedRepoSample.Data.Models.Author")
                         .WithMany("Resources")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CachedRepoSample.Data.Models.ResourceType", "Type")
+                    b.HasOne("CachedRepoSample.Data.Models.ResourceType", "ResourceType")
                         .WithMany()
-                        .HasForeignKey("TypeId");
+                        .HasForeignKey("ResourceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

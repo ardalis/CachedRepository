@@ -8,15 +8,16 @@ namespace CachedRepoSample.Data.Repositories
     public class CachedAuthorRepositoryDecorator : IReadOnlyRepository<Author>
     {
         private readonly AuthorRepository _repository;
-        private readonly IMemoryCache cache;
+        private readonly IMemoryCache _cache;
         private const string MyModelCacheKey = "Users";
         private MemoryCacheEntryOptions cacheOptions;
 
         // alternatively use IDistributedCache if you use redis and multiple services
-        public CachedAuthorRepositoryDecorator(AuthorRepository repository, IMemoryCache cache)
+        public CachedAuthorRepositoryDecorator(AuthorRepository repository,
+            IMemoryCache cache)
         {
-            this._repository = repository;
-            this.cache = cache;
+            _repository = repository;
+            _cache = cache;
 
             // 1 minute caching
             cacheOptions = new MemoryCacheEntryOptions()
@@ -26,26 +27,21 @@ namespace CachedRepoSample.Data.Repositories
         public Author GetById(int id)
         {
             string key = MyModelCacheKey + "-" + id;
-            var result = cache.Get<Author>(key);
-            if (result == null)
-            {
-                result = _repository.GetById(id);
 
-                cache.Set(key, result, cacheOptions);
-            }
-            return result;
+            return _cache.GetOrCreate(key, entry =>
+            {
+                entry.SetOptions(cacheOptions);
+                return _repository.GetById(id);
+            });
         }
 
         public List<Author> List()
         {
-            var result = cache.Get<List<Author>>(MyModelCacheKey);
-            if (result == null)
+            return _cache.GetOrCreate(MyModelCacheKey, entry =>
             {
-                result = _repository.List();
-
-                cache.Set(MyModelCacheKey, result, cacheOptions);
-            }
-            return result;
+                entry.SetOptions(cacheOptions);
+                return _repository.List();
+            });
         }
     }
 }
