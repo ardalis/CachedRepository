@@ -40,6 +40,8 @@ namespace CachedRepoSample
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();
+
+            // Requests for ReadOnlyRepository will use the Cached Implementation
             services.AddScoped<IReadOnlyRepository<Author>, CachedAuthorRepositoryDecorator>();
             services.AddScoped(typeof(EfRepository<>));
             services.AddScoped<AuthorRepository>();
