@@ -6,11 +6,10 @@
 
 <h1>Resources by Author</h1>
 <h2>Load time: @Model.ElapsedTimeMilliseconds</h2>
-
+(cache expires every @Constants.DEFAULT_CACHE_SECONDS seconds)
 <ul>
     @foreach (var author in Model.Authors)
     {
         <li>@author.Name (@author.Resources.Count() total resources)</li>
-
     }
 </ul>

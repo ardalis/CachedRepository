@@ -20,7 +20,7 @@ namespace CachedRepoSample.Data.Repositories
 
             // 5 second cache
             cacheOptions = new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(relative: TimeSpan.FromSeconds(5));
+                .SetAbsoluteExpiration(relative: TimeSpan.FromSeconds(Constants.DEFAULT_CACHE_SECONDS));
         }
 
         public Author GetById(int id)
