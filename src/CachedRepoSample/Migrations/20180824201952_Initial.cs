@@ -62,7 +62,7 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ResourceType",
+                name: "ResourceTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -72,7 +72,7 @@ namespace CachedRepoSample.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourceType", x => x.Id);
+                    table.PrimaryKey("PK_ResourceTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,7 +182,7 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Resource",
+                name: "Resources",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -190,24 +190,24 @@ namespace CachedRepoSample.Migrations
                     Name = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    TypeId = table.Column<int>(nullable: true),
-                    AuthorId = table.Column<int>(nullable: true)
+                    ResourceTypeId = table.Column<int>(nullable: false),
+                    AuthorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Resource", x => x.Id);
+                    table.PrimaryKey("PK_Resources", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Resource_Authors_AuthorId",
+                        name: "FK_Resources_Authors_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Authors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Resource_ResourceType_TypeId",
-                        column: x => x.TypeId,
-                        principalTable: "ResourceType",
+                        name: "FK_Resources_ResourceTypes_ResourceTypeId",
+                        column: x => x.ResourceTypeId,
+                        principalTable: "ResourceTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -1226,7 +1226,7 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ResourceType",
+                table: "ResourceTypes",
                 columns: new[] { "Id", "Name", "SortOrder" },
                 values: new object[,]
                 {
@@ -1237,8 +1237,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 1, 1, "ASP developers need to understand how ASP.NET can help them solve business problems better than any prior product. ASP.NET by Example is designed to provide a 'crash course' on ASP.NET and quickly help the reader start using this new technology.", "ASP.NET By Example", 1, "https://www.amazon.com/ASP-NET-Example-Steven-Smith/dp/0789725622" },
@@ -1593,8 +1593,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 1646, 165, "Description would go here.", "Random Resource", 3, "https://ardalis.com" },
@@ -1949,8 +1949,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 6606, 661, "Description would go here.", "Random Resource", 3, "https://ardalis.com" },
@@ -2305,8 +2305,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 4440, 444, "Description would go here.", "Random Resource", 3, "https://ardalis.com" },
@@ -2661,8 +2661,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 7879, 788, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -3017,8 +3017,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 7483, 748, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -3373,8 +3373,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 1076, 108, "Description would go here.", "Random Resource", 3, "https://ardalis.com" },
@@ -3729,8 +3729,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 9343, 934, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -4085,8 +4085,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 6481, 648, "Description would go here.", "Random Resource", 4, "https://ardalis.com" },
@@ -4441,8 +4441,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 9007, 901, "Description would go here.", "Random Resource", 4, "https://ardalis.com" },
@@ -4797,8 +4797,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 7621, 762, "Description would go here.", "Random Resource", 4, "https://ardalis.com" },
@@ -5153,8 +5153,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 9206, 921, "Description would go here.", "Random Resource", 3, "https://ardalis.com" },
@@ -5509,8 +5509,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 7820, 782, "Description would go here.", "Random Resource", 3, "https://ardalis.com" },
@@ -5865,8 +5865,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 2977, 298, "Description would go here.", "Random Resource", 4, "https://ardalis.com" },
@@ -6221,8 +6221,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 1851, 185, "Description would go here.", "Random Resource", 4, "https://ardalis.com" },
@@ -6577,8 +6577,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 6174, 618, "Description would go here.", "Random Resource", 1, "https://ardalis.com" },
@@ -6933,8 +6933,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 4734, 474, "Description would go here.", "Random Resource", 1, "https://ardalis.com" },
@@ -7289,8 +7289,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 8012, 801, "Description would go here.", "Random Resource", 1, "https://ardalis.com" },
@@ -7645,8 +7645,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 1322, 132, "Description would go here.", "Random Resource", 1, "https://ardalis.com" },
@@ -8001,8 +8001,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 398, 40, "Description would go here.", "Random Resource", 1, "https://ardalis.com" },
@@ -8357,8 +8357,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 3192, 319, "Description would go here.", "Random Resource", 1, "https://ardalis.com" },
@@ -8713,8 +8713,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 2334, 234, "Description would go here.", "Random Resource", 1, "https://ardalis.com" },
@@ -9069,8 +9069,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 4439, 444, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -9425,8 +9425,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 3515, 352, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -9781,8 +9781,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 6243, 624, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -10137,8 +10137,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 5319, 532, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -10493,8 +10493,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 9384, 939, "Description would go here.", "Random Resource", 1, "https://ardalis.com" },
@@ -10849,8 +10849,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 1775, 178, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -11205,8 +11205,8 @@ namespace CachedRepoSample.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Resource",
-                columns: new[] { "Id", "AuthorId", "Description", "Name", "TypeId", "Url" },
+                table: "Resources",
+                columns: new[] { "Id", "AuthorId", "Description", "Name", "ResourceTypeId", "Url" },
                 values: new object[,]
                 {
                     { 853, 85, "Description would go here.", "Random Resource", 2, "https://ardalis.com" },
@@ -11492,14 +11492,14 @@ namespace CachedRepoSample.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Resource_AuthorId",
-                table: "Resource",
+                name: "IX_Resources_AuthorId",
+                table: "Resources",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Resource_TypeId",
-                table: "Resource",
-                column: "TypeId");
+                name: "IX_Resources_ResourceTypeId",
+                table: "Resources",
+                column: "ResourceTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -11520,7 +11520,7 @@ namespace CachedRepoSample.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Resource");
+                name: "Resources");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -11532,7 +11532,7 @@ namespace CachedRepoSample.Migrations
                 name: "Authors");
 
             migrationBuilder.DropTable(
-                name: "ResourceType");
+                name: "ResourceTypes");
         }
     }
 }

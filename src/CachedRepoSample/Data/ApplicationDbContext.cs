@@ -34,16 +34,16 @@ namespace CachedRepoSample.Data
         {
             var list = new List<dynamic>()
             {
-                new { Id = 1, TypeId = 1, AuthorId = 1, Name = "ASP.NET By Example", Url = "https://www.amazon.com/ASP-NET-Example-Steven-Smith/dp/0789725622", Description = "ASP developers need to understand how ASP.NET can help them solve business problems better than any prior product. ASP.NET by Example is designed to provide a 'crash course' on ASP.NET and quickly help the reader start using this new technology." },
-                    new { Id = 2, TypeId = 2, AuthorId = 1, Name = "What's New in ASP.NET Core 2.1", Url = "https://msdn.microsoft.com/en-us/magazine/mt829706.aspx", Description = "Microsoft recently released ASP.NET Core 2.1 along with .NET Core 2.1 and Entity Framework (EF) Core 2.1. Combined, these releases offer some great improvements in performance, as well as additional features for .NET Core developers. Microsoft is also offering Long-Term Support (LTS) with this release, meaning it will remain supported for three years. This article provides an overview of the improvements in ASP.NET Core 2.1." },
-                    new {Id = 3, TypeId = 3, AuthorId = 1, Name = "SOLID Principles of Object-Oriented Design", Url = "https://www.pluralsight.com/courses/principles-oo-design", Description = "The SOLID principles are fundamental to designing effective, maintainable, object-oriented systems. Whether you've only just begun writing software or have been doing so for years, these principles, when used appropriately, can improve the encapsulation and coupling of your application, making it more malleable and testable in the face of changing requirements." }
+                new { Id = 1, ResourceTypeId = 1, AuthorId = 1, Name = "ASP.NET By Example", Url = "https://www.amazon.com/ASP-NET-Example-Steven-Smith/dp/0789725622", Description = "ASP developers need to understand how ASP.NET can help them solve business problems better than any prior product. ASP.NET by Example is designed to provide a 'crash course' on ASP.NET and quickly help the reader start using this new technology." },
+                    new { Id = 2, ResourceTypeId = 2, AuthorId = 1, Name = "What's New in ASP.NET Core 2.1", Url = "https://msdn.microsoft.com/en-us/magazine/mt829706.aspx", Description = "Microsoft recently released ASP.NET Core 2.1 along with .NET Core 2.1 and Entity Framework (EF) Core 2.1. Combined, these releases offer some great improvements in performance, as well as additional features for .NET Core developers. Microsoft is also offering Long-Term Support (LTS) with this release, meaning it will remain supported for three years. This article provides an overview of the improvements in ASP.NET Core 2.1." },
+                    new {Id = 3, ResourceTypeId = 3, AuthorId = 1, Name = "SOLID Principles of Object-Oriented Design", Url = "https://www.pluralsight.com/courses/principles-oo-design", Description = "The SOLID principles are fundamental to designing effective, maintainable, object-oriented systems. Whether you've only just begun writing software or have been doing so for years, these principles, when used appropriately, can improve the encapsulation and coupling of your application, making it more malleable and testable in the face of changing requirements." }
             };
             int id = 4;
             foreach (var author in authors)
             {
                 for (int i = 0; i < MAX_RESOURCES_PER_AUTHOR; i++)
                 {
-                    list.Add(new {Id = id++, TypeId = i % 4 + 1, AuthorId = author.Id, Name = "Random Resource", Url = "https://ardalis.com", Description = "Description would go here."});
+                    list.Add(new {Id = id++, ResourceTypeId = i % 4 + 1, AuthorId = author.Id, Name = "Random Resource", Url = "https://ardalis.com", Description = "Description would go here."});
                 }
 
             }

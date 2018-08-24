@@ -8,7 +8,7 @@ namespace CachedRepoSample.Data.Repositories
     public class CachedAuthorRepositoryDecorator : IReadOnlyRepository<Author>
     {
         private readonly AuthorRepository _repository;
-        private readonly IMemoryCache cache;
+        private readonly IMemoryCache _cache;
         private const string MyModelCacheKey = "Authors";
         private MemoryCacheEntryOptions cacheOptions;
 
