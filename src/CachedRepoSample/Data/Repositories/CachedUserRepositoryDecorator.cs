@@ -8,8 +8,8 @@ namespace CachedRepoSample.Data.Repositories
     public class CachedAuthorRepositoryDecorator : IReadOnlyRepository<Author>
     {
         private readonly AuthorRepository _repository;
-        private readonly IMemoryCache _cache;
-        private const string MyModelCacheKey = "Users";
+        private readonly IMemoryCache cache;
+        private const string MyModelCacheKey = "Authors";
         private MemoryCacheEntryOptions cacheOptions;
 
         // alternatively use IDistributedCache if you use redis and multiple services
@@ -19,9 +19,9 @@ namespace CachedRepoSample.Data.Repositories
             _repository = repository;
             _cache = cache;
 
-            // 1 minute caching
+            // 5 second cache
             cacheOptions = new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(relative: TimeSpan.FromMinutes(1));
+                .SetAbsoluteExpiration(relative: TimeSpan.FromSeconds(Constants.DEFAULT_CACHE_SECONDS));
         }
 
         public Author GetById(int id)

@@ -2,21 +2,27 @@
 using CachedRepoSample.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace CachedRepoSample.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly IReadOnlyRepository<Author> _userRepository;
+        private readonly IReadOnlyRepository<Author> _authorRepository;
 
-        public IndexModel(IReadOnlyRepository<Author> userRepository)
+        public IndexModel(IReadOnlyRepository<Author> authorRepository)
         {
-            this._userRepository = userRepository;
+            this._authorRepository = authorRepository;
         }
-        public List<Author> Users { get; set; }
+        public List<Author> Authors { get; set; }
+        public long ElapsedTimeMilliseconds { get; set; }
+
         public void OnGet()
         {
-            Users = _userRepository.List();
+            var timer = Stopwatch.StartNew();
+            Authors = _authorRepository.List();
+            timer.Stop();
+            ElapsedTimeMilliseconds = timer.ElapsedMilliseconds;
         }
     }
 }
